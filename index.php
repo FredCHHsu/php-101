@@ -40,17 +40,17 @@ HTML;
 // $messages = [
 //     [
 //         'id' => 1,
-//         'author' => '作者',
+//         'title' => '標題',
 //         'content' => '留言內容範例，留言內容範例，留言內容範例.'
 //     ],
 //     [
 //         'id' => 2,
-//         'author' => '名',
+//         'title' => '標',
 //         'content' => '留言內容範例，留言內言內容範例，留言內容範例，留言內容範例.'
 //     ],
 //     [
 //         'id' => 3,
-//         'author' => '作者',
+//         'title' => '標題',
 //         'content' => '留言容範例，留言內容範例，留言內容範例.'
 //     ],
 // ];
@@ -58,13 +58,13 @@ HTML;
 // $returns = [
 //     [
 //         'id' => 4,
-//         'author' => 'return',
+//         'title' => 'return',
 //         'content' => '回爆你',
 //         'parent_id' => 1
 //     ],
 //     [
 //         'id' => 5,
-//         'author' => 'return',
+//         'title' => 'return',
 //         'content' => '爆你',
 //         'parent_id' => 1
 //     ]
@@ -74,13 +74,14 @@ HTML;
 	<div class="col-md-6 col-md-offset-3">
 		<form action="create.php" method="post" accept-charset="utf-8" class="form-horizontal">
             <div class="input-group">
+                <span class="input-group-addon">標題</span>
+                <input type="text" name="title" class="form-control" aria-describedby="basic-addon3">
+            </div>
+            <div class="input-group">
                 <span class="input-group-addon">內容</span>
                 <input type="text" name="content" class="form-control" aria-describedby="basic-addon3">
             </div>
-            <div class="input-group">
-                <span class="input-group-addon">作者</span>
-                <input type="text" name="author" class="form-control" aria-describedby="basic-addon3">
-            </div>
+            
             <div class="input-group">
                 <span class="input-group-addon">回應Ｎ樓</span>
                 <input type="text" name="parent_id" class="form-control" aria-describedby="basic-addon3">
@@ -90,17 +91,18 @@ HTML;
 	</div>
 	<? foreach ($messages as $message): ?>
 	   <div class="col-md-6 col-md-offset-3" style="border-bottom: solid 1px gray">
-            <h2> <?= $message['content'] ?></h2>
-            <p>by <?= $message['author'] ?> （ <?= $message['id'] ?>樓 ）
+            <h4> <?= $message['title'] ?> </h4>
+            <p> <?= $message['content'] ?> </p>
+            <p>by（ <?= $message['id'] ?>樓 ）
                 <?= deleteBtn( $message['id'] ) ?>
                 <?= editBtn( $message['id'] ) ?>
             </p>
             <? foreach ($returns as $re): ?>
             <? if ( $re['parent_id'] == $message['id']): ?>
                 <div class="col-md-6 col-md-offset-6">
-                    <h2> <?= $re['content'] ?></h2>
+                    <h4> <?= $re['title'] ?> </h4>
+                    <p> <?= $re['content'] ?></p>
                     <p>回應 <?= $re['parent_id']?> 樓
-                        by <?= $re['author'] ?> （ <?= $re['id'] ?>樓 ）
                         <span class="glyphicon glyphicon-remove btn btn-sm btn-danger"></span>
                         <span class="glyphicon glyphicon-pencil btn btn-sm btn-default"></span>
                     </p>
