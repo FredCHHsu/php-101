@@ -1,19 +1,6 @@
 <?php 
 require 'database.php';
 
-if (isset($_POST['content']) != '') {
-    $sql = "INSERT INTO messages(author, content, parent_id) VALUES(?,?,?)";
-    $statement = $dbp->prepare($sql);
-    $result = $statement->execute([$_POST['author'], $_POST['content'], ($_POST['parent_id'] ?: null)]);
-    if (!$result) {
-        var_dump($statement->errorInfo());
-        die('Something Wrong');
-    } else {
-        header('location: ./');
-        return;
-    }
-}
-
 $sql = "SELECT * FROM messages WHERE ( is_deleted = 0  AND parent_id IS NULL )";
 $query = $dbp->query($sql);
 $messages = $query->fetchAll();
@@ -22,9 +9,6 @@ $sql2 = "SELECT * FROM messages WHERE ( is_deleted = 0  AND parent_id IS NOT NUL
 $query2 = $dbp->query($sql2);
 $returns = $query2->fetchAll();
 
-?>
-
-<?
 function deleteBtn( $id ){
 return <<<HTML
     <form class="form-horizontal" action="delete.php" method="post" style="display: inline">
@@ -33,6 +17,7 @@ return <<<HTML
     </form>
 HTML;
 }
+
 function editBtn( $id ){
 return <<<HTML
     <form class="form-horizontal" action="edit.php" method="get" style="display: inline">
@@ -41,6 +26,7 @@ return <<<HTML
     </form>
 HTML;
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -86,7 +72,7 @@ HTML;
  ?>
 <body>
 	<div class="col-md-6 col-md-offset-3">
-		<form action="./" method="post" accept-charset="utf-8" class="form-horizontal">
+		<form action="create.php" method="post" accept-charset="utf-8" class="form-horizontal">
             <div class="input-group">
                 <span class="input-group-addon">內容</span>
                 <input type="text" name="content" class="form-control" aria-describedby="basic-addon3">
