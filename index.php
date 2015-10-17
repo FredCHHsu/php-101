@@ -71,24 +71,9 @@ HTML;
 // ];
  ?>
 <body>
-	<div class="col-md-6 col-md-offset-3">
-		<form action="create.php" method="post" accept-charset="utf-8" class="form-horizontal">
-            <div class="input-group">
-                <span class="input-group-addon">標題</span>
-                <input type="text" name="title" class="form-control" aria-describedby="basic-addon3">
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">內容</span>
-                <input type="text" name="content" class="form-control" aria-describedby="basic-addon3">
-            </div>
-            
-            <div class="input-group">
-                <span class="input-group-addon">回應Ｎ樓</span>
-                <input type="text" name="parent_id" class="form-control" aria-describedby="basic-addon3">
-            </div>
-            <input type="submit" value="po文" class="btn btn-default">
-		</form>
-	</div>
+    <form action="new.php" class='pull-right'>
+        <button class="btn btn-lg btn-primary">New Post</button>
+    </form>
 	<? foreach ($messages as $message): ?>
 	   <div class="col-md-6 col-md-offset-3" style="border-bottom: solid 1px gray">
             <h4> <?= $message['title'] ?> </h4>
