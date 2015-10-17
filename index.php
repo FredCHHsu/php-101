@@ -72,9 +72,12 @@ HTML;
  ?>
 <body>
 
-    <form action="new.php" class="col-md-6 col-md-offset-3">
-        <button class="btn btn-block btn-lg btn-info">New Post</button>
+    <form action="new.php">
+        <button class="btn btn-lg btn-info" style="position: fixed; top:0; right:10px; z-index: 100;">
+        New Post</button>
     </form>
+
+    <br>
     
 	<? foreach ($messages as $message): ?>
 	   <div class="col-md-6 col-md-offset-3" style="border-bottom: solid 1px gray">
