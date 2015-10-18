@@ -1,5 +1,8 @@
 <?php 
 require 'database.php';
+session_start();
+// session_destroy();
+// $_SESSION['login_user'] = "Fred";
 
 $sql = "SELECT * FROM messages WHERE ( is_deleted = 0  AND parent_id IS NULL )";
 $query = $dbp->query($sql);
@@ -71,13 +74,22 @@ HTML;
 // ];
  ?>
 <body>
-
-    <form action="new.php">
-        <button class="btn btn-lg btn-info" style="position: fixed; top:0; right:10px; z-index: 100;">
-        New Post</button>
-    </form>
-
-    <br>
+    <? if ( isset($_SESSION['login_user']) ): ?>
+        <h4>hello! <?= $_SESSION['login_user'] ?></h4>
+        <form action="new.php">
+            <button class="btn btn-lg btn-info" style="position: fixed; top:0; right:10px; z-index: 100;">
+            New Post</button>
+        </form>
+        <form action="user/logout.php">
+            <button class="btn btn-lg btn-default" style="position: fixed; top:50px; right:10px; z-index: 100;">
+            Log out</button>
+        </form>
+    <? else: ?>
+        <form action="user/sign_in.php">
+            <button class="btn btn-lg btn-info" style="position: fixed; top:0; right:10px; z-index: 100;">
+            Login</button>
+        </form>
+    <? endif?>
     
 	<? foreach ($messages as $message): ?>
 	   <div class="col-md-6 col-md-offset-3" style="border-bottom: solid 1px gray">
