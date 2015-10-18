@@ -1,6 +1,6 @@
 <?php
-include('login.php'); // Includes Login Script
-
+ini_set('display_errors', 'On');
+include 'login.php';
 if(isset($_SESSION['login_user'])){
   header("location: ../");
 }
@@ -15,14 +15,15 @@ if(isset($_SESSION['login_user'])){
 <body>
   <div class="col-md-6 col-md-offset-3">
     <h1>login</h1>
+    <p><?php echo $error ?></p>
     <form action="" method="post">
       <div class="input-group">
         <span class="input-group-addon">user name</span>
-        <input type="text" class="form-control" placeholder="name">
+        <input type="text" name="name" class="form-control" placeholder="name">
       </div>
       <div class="input-group">
         <span class="input-group-addon">password</span>
-        <input type="password" class="form-control" placeholder="password">
+        <input type="password" name="password" class="form-control" placeholder="password">
       </div>
       <input type="submit" value="login" class='btn btn-lg btn-default'>
     </form>
