@@ -9,8 +9,14 @@ if ( empty($_POST['name']) || empty($_POST['password'])  ) {
 
   require '../database.php';
   $sql = "SELECT * from users where name='$name' AND password='$password'";
-  // $query = $dbp->query($sql);
-  // $rows = mysql_num_rows($query);
+  $query = $dbp->query($sql);
+  $user = $query->fetchAll();
+  $rowCount = count($user);
   
-  $error = $sql;
+  if ( $rowCount == 1 ) {
+    $_SESSION['login_user']= $name;
+    header('location: ../');
+  } else {
+    $error = "wrong user or password";
+  }
 }

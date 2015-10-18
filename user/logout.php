@@ -1,11 +1,10 @@
 <?php 
 ini_set('display_errors', 'On');
 session_start();
-if ( isset($_SESSION['login_user']) ){
-  unset( $_SESSION['login_user'] );
-  header("location: ../");
+if ( session_destroy() ){
+  header("location: ../index.php");
 } else {
-  echo "something wrong!"
+  echo "something wrong!";
 }
 
 ?>

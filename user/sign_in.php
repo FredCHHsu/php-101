@@ -1,9 +1,9 @@
 <?php
 ini_set('display_errors', 'On');
 include 'login.php';
-if(isset($_SESSION['login_user'])){
-  header("location: ../");
-}
+// if(isset($_SESSION['login_user'])){
+//   header("location: ../");
+// }
 ?>
 <!DOCTYPE html>
 <html>
