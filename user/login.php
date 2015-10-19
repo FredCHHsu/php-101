@@ -1,4 +1,5 @@
 <?php 
+require '../database.php';
 session_start();
 $error = '';
 if ( empty($_POST['name']) || empty($_POST['password'])  ) {
@@ -8,9 +9,12 @@ if ( empty($_POST['name']) || empty($_POST['password'])  ) {
   $password = $_POST['password'];
 
   require '../database.php';
-  $sql = "SELECT * from users where name='$name' AND password='$password'";
-  $query = $dbp->query($sql);
-  $user = $query->fetchAll();
+  // $sql = "SELECT * from users where name='$name' AND password='$password'";
+  $sql = "SELECT * from users where name=? AND password=?";
+  $statement = $dbp->prepare($sql);
+  $user = $statement->execute([$name, $password]);
+  // $query = $dbp->query($sql);
+  // $user = $query->fetchAll();
   $rowCount = count($user);
   
   if ( $rowCount == 1 ) {
