@@ -1,16 +1,12 @@
 <?php 
 require 'database.php';
+require 'post.php';
+
 session_start();
-// session_destroy();
-// $_SESSION['login_user'] = "Fred";
 
-$sql = "SELECT * FROM messages WHERE ( is_deleted = 0  AND parent_id IS NULL )";
-$query = $dbp->query($sql);
-$messages = $query->fetchAll();
-
-$sql2 = "SELECT * FROM messages WHERE ( is_deleted = 0  AND parent_id IS NOT NULL )";
-$query2 = $dbp->query($sql2);
-$returns = $query2->fetchAll();
+$m = new Message($dbp);
+$messages = $m->messages;
+$returns = $m->returns;
 
 function deleteBtn( $id ){
 return <<<HTML
@@ -90,7 +86,7 @@ HTML;
             Login</button>
         </form>
     <? endif?>
-    
+
 	<? foreach ($messages as $message): ?>
 	   <div class="col-md-6 col-md-offset-3" style="border-bottom: solid 1px gray">
             <h4> <?= $message['title'] ?> </h4>
